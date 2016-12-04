@@ -5,19 +5,17 @@ require 'klunk/topic'
 
 module Klunk
   class << self
-    attr_accessor :configuration
-  end
+    attr_accessor :configuration, :configured
 
-  @@configured = false
+    def configure
+      self.configured = true
+      self.configuration ||= Configuration.new
+      yield(configuration)
+    end
 
-  def self.configured?
-    @@configured
-  end
-
-  def self.configure
-    @@configured = true
-    self.configuration ||= Configuration.new
-    yield(configuration)
+    def configured?
+      configured
+    end
   end
 end
 

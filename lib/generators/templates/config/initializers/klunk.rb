@@ -1,5 +1,4 @@
-Klunk.configure  do |config|
-
+Klunk.configure do |config|
   # Organize names by using a prefix, usually the project name
   config.prefix = Rails.application.class.parent_name.downcase if defined?(Rails)
 
@@ -8,5 +7,4 @@ Klunk.configure  do |config|
 
   # Message hospital: maximum retries limit
   config.retries_limit = 8
-
 end
