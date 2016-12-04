@@ -1,7 +1,19 @@
-# Define your Amazon SQS queues here
+# Define your Amazon SQS queues and subscriptions here
 
-# Example:
+# Examples:
 # -
-#  name: queue_one
+#   :name: queue_one
+#
 # -
-#  name: queue_two
+#   :name: queue_two
+#   :retries_limit: 3
+#
+# -
+#   :name: queue_three
+#   :retries_limit: 8
+#   :subscribes:
+#     -
+#       :name: topic_one
+#     -
+#       :system: some_other_system_name
+#       :name: topic_two

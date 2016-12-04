@@ -1,7 +1,11 @@
 module Klunk
   class Queue
-    def client
-      @client ||= Aws::SQS::Client.new
+    QUEUES = YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
+    
+    class << self
+      def client
+        @client ||= Aws::SQS::Client.new
+      end
     end
   end
 end

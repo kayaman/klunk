@@ -83,13 +83,18 @@ Run the generator:
 ```console
 rails generate klunk:install
 ```
-## Disclaimer
 
- __Klunk__ only works with Amazon [SNS](https://aws.amazon.com/sns/) and [SQS](https://aws.amazon.com/sqs/) services. But you shouldn't be using anything else, right?! :wink:
+## Configuration
+
+TODO: Explain how to setup - configuration files, values and so on...
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO: Write usage instructions here - explain the `Rake` tasks...
+
+## Disclaimer
+
+ __Klunk__ only works with Amazon [SNS](https://aws.amazon.com/sns/) and [SQS](https://aws.amazon.com/sqs/) services. But you shouldn't be using anything else, right?! :wink:
 
 ## Maintainers
 
@@ -99,3 +104,9 @@ TODO: Write usage instructions here
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/kayaman/klunk.
+
+## License
+
+  __Klunk__ is an Open Source project licensed under the terms of
+the LGPLv3 license.  Please see [http://www.gnu.org/licenses/lgpl-3.0.html](http://www.gnu.org/licenses/lgpl-3.0.html)
+for license text.

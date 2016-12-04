@@ -2,6 +2,6 @@
 
 # Example:
 # -
-#  name: event_one
+#  :name: event_one
 # -
-#  name: event_two
+#  :name: event_two
