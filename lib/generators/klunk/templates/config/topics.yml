@@ -1,0 +1,7 @@
+# Define your Amazon SNS topics here
+
+# Example:
+# -
+#  name: event_one
+# -
+#  name: event_two

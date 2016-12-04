@@ -2,7 +2,9 @@ namespace :klunk do
   namespace :sns do
     desc 'Create SNS topics'
     task create_topics: :environment do
-      # TODO: help me
+      Klunk::Topic::TOPICS.each do |topic|
+        puts Klunk::Topic.create(topic[:name])
+      end
     end
   end
 

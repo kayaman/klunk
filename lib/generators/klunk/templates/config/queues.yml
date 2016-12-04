@@ -1,0 +1,7 @@
+# Define your Amazon SQS queues here
+
+# Example:
+# -
+#  name: queue_one
+# -
+#  name: queue_two

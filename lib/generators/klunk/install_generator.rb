@@ -8,6 +8,14 @@ module Klunk
         template 'config/initializers/klunk.rb'
         puts 'Install complete! Check \'config/initializers/klunk.rb\'.'
       end
+
+      def copy_topics_configuration_file
+        template 'config/topics.yml'
+      end
+
+      def copy_queues_configuration_file
+        template 'config/queues.yml'
+      end
     end
   end
 end
