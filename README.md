@@ -83,6 +83,9 @@ Run the generator:
 ```console
 rails generate klunk:install
 ```
+## Disclaimer
+
+ __Klunk__ only works with Amazon [SNS](https://aws.amazon.com/sns/) and [SQS](https://aws.amazon.com/sqs/) services. But you shouldn't be using anything else, right?! :wink:
 
 ## Usage
 
