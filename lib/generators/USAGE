@@ -1,0 +1,4 @@
+To copy a Klunk initializer to your Rails app,
+with some default configuration values, just do:
+
+    rails generate klunk:install
