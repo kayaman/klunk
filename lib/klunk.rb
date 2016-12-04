@@ -10,7 +10,7 @@ module Klunk
 
   @@configured = false
 
-  def self.configured? #:nodoc:
+  def self.configured?
     @@configured
   end
 
