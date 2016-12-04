@@ -2,7 +2,7 @@
 
 ## Goal
 
-Create and setup __publishers__ (topics) and __subscribers__ (queues) of your Rails application.
+Create and setup __publishers__ (topics) and __subscribers__ (queues) for Rails applications.
 
 ## About
 
