@@ -3,13 +3,13 @@ module Klunk
     TOPICS = YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
 
     class << self
-      def name_for(name)
-        [Klunk.configuration.prefix, ENV['EB_ENV'], name]
+      def name_for(topic_name)
+        [Klunk.configuration.prefix, ENV['EB_ENV'], topic_name]
           .compact.reject(&:blank?).join('_')
       end
 
-      def create(name)
-        response = client.create_topic(name: name_for(name))
+      def create(topic_name)
+        response = client.create_topic(name: name_for(topic_name))
         response.topic_arn
       end
 

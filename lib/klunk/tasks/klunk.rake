@@ -16,7 +16,10 @@ namespace :klunk do
 
     desc 'Create SQS queues'
     task create_queues: :environment do
-      # TODO: help me
+      Klunk::Queue::QUEUES.each do |queue|
+        q = Klunk::Queue.build(queue)
+        puts q[:queue_url]
+      end
     end
   end
 end
