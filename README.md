@@ -86,6 +86,56 @@ rails generate klunk:install
 
 ## Configuration
 
+### Common
+
+ Check your `config/initializers/klunk.rb` file for basic and default values.
+
+ - `prefix`: organize names by using a prefix, usually the system name. Defaults to current Rails application name.
+ - `deadletter_suffix`: suffix for dead letter queue names. Default value is `failures`.
+ - `retries_limit`: the number of times that a message can be received before being sent to a dead letter queue. Must be between 1 and 1000. Default is 8.
+ - `message_retention_period`: The number of seconds for which the queue should retain a message. An integer representing seconds, from 60 (1 minute) to 1209600 (14 days). The default is 345600 (4 days).
+ - `deadletter_message_retention_period`: Same as above, for the corresponding dead letter queue. It's a good practice to keep the failed messages as long as you can to be able to retry them, so the default value is 14 days.
+
+#### Notes
+
+  - Queue names and queue URLs are case-sensitive
+
+### Queues
+
+  Use the file `config/queues.yml` to define your application queues.
+
+  - `name`: the queue name is mandatory. This value will be used together with the application and environment names to build the final queue name. Example: `klunk_development_queue` and `klunk_development_queue_failures`.
+  - `retries_limit`: optional, if set, this value will override the default maximum retries.
+  - `subscribes`: the topics this queue subscribes to (optional).
+    - `name`: the topic name (required). The topic name will be built like queue names (based on prefix and environment values unless `prefix`is set to false, as described below.
+    - `prefix`: boolean flag to decide if the topic name should  be built like the queues naming convention. If set to `false`, the full topic name must be provided. Optional, defaults to `true`.
+    - `system`: optional, used as prefix for external system name. Defaults to the current global `prefix` name.
+
+
+```yaml
+
+-
+  :name: queue_one
+-
+  :name: queue_two
+  :retries_limit: 3
+-
+  :name: queue_three
+  :subscribes:
+    -
+      :system: service_one
+      :name: topic_one
+    -
+      :system: service_one
+      :name: topic_two
+    -
+      :prefix: false
+      :name: full_topic_name
+
+```
+
+### Topics
+
 TODO: Explain how to setup - configuration files, values and so on...
 
 ## Usage
