@@ -5,20 +5,32 @@ module Klunk
     class << self
       def build(queue_options)
         queue_name = queue_options.delete(:name)
+        subscriptions = queue_options.delete(:subscribes)
         deadletter_queue = create_deadletter(queue_name)
         deadletter_attributes = get_attributes(deadletter_queue[:queue_url])
         attributes = build_attributes(queue_options)
         attributes[:RedrivePolicy][:deadLetterTargetArn] =
           deadletter_attributes['QueueArn']
         attributes[:RedrivePolicy] = attributes[:RedrivePolicy].to_json
-        create(queue_name, attributes)
+        create(queue_name, attributes, subscriptions)
       end
 
-      def create(queue_name, attributes)
-        client.create_queue(
-          queue_name: name_for(queue_name),
-          attributes: attributes
-        )
+      def create(queue_name, attributes, subscriptions)
+        begin
+          queue = client.create_queue(
+            queue_name: name_for(queue_name),
+            attributes: attributes
+          )
+        rescue Aws::SQS::Errors::QueueAlreadyExists
+          puts "#{queue_name} already exists.".green
+          queue = client.create_queue(queue_name: name_for(queue_name))
+        end
+        subscriptions.to_a.each do |subscription|
+          topic_name = Topic.name_for(subscription[:name], subscription)
+          topic = Topic.create(topic_name)
+          ap Topic.subscribe(queue.queue_url, topic.topic_arn)
+        end
+        queue
       end
 
       def get_attributes(queue_url, attribute_names = ['All'])
@@ -59,6 +71,10 @@ module Klunk
 
       def client
         @client ||= Aws::SQS::Client.new
+      end
+
+      def resource
+        Aws::SQS::Resource.new(client: client)
       end
 
       def deadletter_message_retention_period

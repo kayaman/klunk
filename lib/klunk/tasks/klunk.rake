@@ -18,7 +18,7 @@ namespace :klunk do
     task create_queues: :environment do
       Klunk::Queue::QUEUES.each do |queue|
         q = Klunk::Queue.build(queue)
-        puts q[:queue_url]
+        puts "\n#{q[:queue_url]}"
       end
     end
   end
