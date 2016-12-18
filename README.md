@@ -1,5 +1,10 @@
 # Klunk
 
+[![Build Status](https://travis-ci.org/kayaman/klunk.svg?branch=master)](https://travis-ci.org/kayaman/klunk)
+[![Code Climate](https://codeclimate.com/github/kayaman/klunk/badges/gpa.svg)](https://codeclimate.com/github/kayaman/klunk)
+[![Test Coverage](https://codeclimate.com/github/kayaman/klunk/badges/coverage.svg)](https://codeclimate.com/github/kayaman/klunk/coverage)
+
+
 ## Goal
 
 Create and setup __publishers__ (topics) and __subscribers__ (queues) for Rails applications.
