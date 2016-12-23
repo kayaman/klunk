@@ -10,9 +10,19 @@ module Klunk
       end
 
       def create(topic_name)
-        topic = client.create_topic(name: topic_name)
-        puts "Topic: #{topic.topic_arn}".cyan
+        topic = client.create_topic(name: name_for(topic_name))
+        puts "Topic created: #{topic.topic_arn}".cyan
         topic
+      end
+
+      def publish(topic_name, message)
+        topic_arn = topic_arn(topic_name)
+        puts "Publishing to #{topic_arn}: #{message}"
+        client.publish(topic_arn: topic_arn(topic_name), message: message)
+      end
+
+      def topic_arn(topic_name, options = {})
+        "arn:aws:sns:#{ENV['AWS_REGION']}:#{ENV['AWS_ACCOUNT_ID']}:#{name_for(topic_name, options)}"
       end
 
       def subscribe(queue_url, topic_arn, previous_policy = nil)
@@ -29,10 +39,14 @@ module Klunk
           previous_policy = JSON.parse(queue_attributes['Policy'])
         end
         add_policy(queue_url, topic_arn, previous_policy)
+      end
+
+      def describe(topic_name, options = {})
+        puts topic_arn(topic_name, options)
         {
-          topic: topic_arn,
+          topic: topic_arn(topic_name, options),
           subscriptions: client.list_subscriptions_by_topic(
-            topic_arn: topic_arn
+            topic_arn: topic_arn(topic_name, options)
           ).subscriptions.map { |topic| topic[:endpoint] }
         }
       end
