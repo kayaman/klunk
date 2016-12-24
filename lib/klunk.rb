@@ -5,6 +5,10 @@ require 'klunk/queue'
 require 'klunk/topic'
 
 module Klunk
+
+  autoload :Queue
+  autoload :Topic
+
   class << self
     attr_accessor :configuration, :configured
 
@@ -19,7 +23,7 @@ module Klunk
     end
 
     def eager_load!
-
+      super
     end
   end
 end

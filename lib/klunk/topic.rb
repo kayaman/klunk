@@ -1,5 +1,5 @@
 module Klunk
-  class Topic < Base
+  class Topic
 
     class << self
 

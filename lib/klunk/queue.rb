@@ -1,5 +1,5 @@
 module Klunk
-  class Queue < Base
+  class Queue
 
     class << self
 
