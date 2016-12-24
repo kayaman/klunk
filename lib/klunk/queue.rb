@@ -1,5 +1,5 @@
 module Klunk
-  class Queue
+  class Queue < Base
     QUEUES = YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
 
     class << self

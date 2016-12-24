@@ -1,5 +1,5 @@
 module Klunk
-  class Topic
+  class Topic < Base
     TOPICS = YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
 
     class << self
