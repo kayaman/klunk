@@ -17,6 +17,10 @@ module Klunk
     def configured?
       configured
     end
+
+    def eager_load!
+
+    end
   end
 end
 

@@ -1,4 +1,4 @@
-require 'safe_yaml'
+require 'yaml'
 module Klunk
   class Base
 
