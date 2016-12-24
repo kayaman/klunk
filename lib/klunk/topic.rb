@@ -1,12 +1,20 @@
 module Klunk
   class Topic < Base
-    TOPICS = YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
 
     class << self
+
+      def topics
+        if File.exists?('config/topics.yml')
+          YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
+        else
+          []
+        end
+      end
+
       def name_for(topic_name, options = {})
         system_name = options[:system] || Klunk.configuration.prefix
         [system_name, ENV['EB_ENV'], topic_name]
-          .compact.reject(&:blank?).join('_')
+        .compact.reject(&:blank?).join('_')
       end
 
       def create(topic_name)
@@ -29,11 +37,11 @@ module Klunk
         queue_attributes = Klunk::Queue.get_attributes(queue_url)
         queue_arn = queue_attributes['QueueArn']
         subscription = client.subscribe(
-          topic_arn: topic_arn, protocol: 'sqs', endpoint: queue_arn
+        topic_arn: topic_arn, protocol: 'sqs', endpoint: queue_arn
         )
         client.set_subscription_attributes(
-          subscription_arn: subscription.subscription_arn,
-          attribute_name: 'RawMessageDelivery', attribute_value: 'true'
+        subscription_arn: subscription.subscription_arn,
+        attribute_name: 'RawMessageDelivery', attribute_value: 'true'
         )
         if queue_attributes.key?('Policy')
           previous_policy = JSON.parse(queue_attributes['Policy'])
@@ -46,7 +54,7 @@ module Klunk
         {
           topic: topic_arn(topic_name, options),
           subscriptions: client.list_subscriptions_by_topic(
-            topic_arn: topic_arn(topic_name, options)
+          topic_arn: topic_arn(topic_name, options)
           ).subscriptions.map { |topic| topic[:endpoint] }
         }
       end
@@ -54,13 +62,13 @@ module Klunk
       def add_policy(queue_url, topic_arn, previous_policy)
         previous_policy ||= build_policy(queue_url, topic_arn)
         Queue.client.set_queue_attributes(
-          queue_url: queue_url,
-          attributes: {
-            Policy: previous_policy.tap do |p|
-              (p['Statement'] ||= []) << build_statement(queue_url, topic_arn)
-              p['Statement'].uniq!
-            end.to_json
-          }
+        queue_url: queue_url,
+        attributes: {
+          Policy: previous_policy.tap do |p|
+            (p['Statement'] ||= []) << build_statement(queue_url, topic_arn)
+            p['Statement'].uniq!
+          end.to_json
+        }
         )
       end
 

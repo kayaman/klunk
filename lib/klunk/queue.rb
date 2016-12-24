@@ -1,20 +1,16 @@
 module Klunk
   class Queue < Base
-    QUEUES = load_queues!
-
-
 
     class << self
 
-      def load_queues!
-        config_file = 'config/queues.yml'
-        if File.exists?(config_file)
+      def queues
+        if File.exists?('config/queues.yml')
           YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
         else
           []
         end
       end
-      
+
       def build(queue_options)
         queue_name = queue_options.delete(:name)
         subscriptions = queue_options.delete(:subscribes)
@@ -82,7 +78,7 @@ module Klunk
       end
 
       def queues_for_shoryuken_config
-        Klunk::Queue::QUEUES.map{|queue| [name_for(queue[:name]), queue[:priority]] }
+        Klunk::Queue::queues.map{|queue| [name_for(queue[:name]), queue[:priority]] }
       end
 
       def client
