@@ -5,7 +5,7 @@ module Klunk
 
       def topics
         if File.exists?('config/topics.yml')
-          YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
+          ::YAML.load_file('config/topics.yml').map(&:deep_symbolize_keys)
         else
           []
         end

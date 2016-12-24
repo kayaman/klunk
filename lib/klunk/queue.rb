@@ -5,7 +5,7 @@ module Klunk
 
       def queues
         if File.exists?('config/queues.yml')
-          YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
+          ::YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
         else
           []
         end

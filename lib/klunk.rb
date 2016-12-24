@@ -1,8 +1,5 @@
 require 'klunk/version'
 require 'klunk/configuration'
-require 'klunk/base'
-require 'klunk/queue'
-require 'klunk/topic'
 
 module Klunk
 
