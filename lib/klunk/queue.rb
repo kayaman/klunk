@@ -1,6 +1,15 @@
 module Klunk
   class Queue < Base
-    QUEUES = YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
+    QUEUES = load_queues!
+
+    def load_queues!
+      config_file = 'config/queues.yml'
+      if File.exists?(config_file)
+        YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
+      else
+        []
+      end
+    end
 
     class << self
       def build(queue_options)
