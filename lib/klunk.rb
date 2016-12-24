@@ -2,6 +2,7 @@ require 'klunk/version'
 require 'klunk/configuration'
 
 module Klunk
+  extend ActiveSupport::Autoload
 
   autoload :Queue
   autoload :Topic
