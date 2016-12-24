@@ -2,16 +2,19 @@ module Klunk
   class Queue < Base
     QUEUES = load_queues!
 
-    def load_queues!
-      config_file = 'config/queues.yml'
-      if File.exists?(config_file)
-        YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
-      else
-        []
-      end
-    end
+
 
     class << self
+
+      def load_queues!
+        config_file = 'config/queues.yml'
+        if File.exists?(config_file)
+          YAML.load_file('config/queues.yml').map(&:deep_symbolize_keys)
+        else
+          []
+        end
+      end
+      
       def build(queue_options)
         queue_name = queue_options.delete(:name)
         subscriptions = queue_options.delete(:subscribes)
