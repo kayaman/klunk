@@ -70,9 +70,7 @@ module Klunk
       end
 
       def queues_for_shoryuken_config
-        QUEUES.map{|queue| [name_for(queue[:name]), queue[:priority]] }
-      end
-
+        Klunk::Queue::QUEUES.map{|queue| [name_for(queue[:name]), queue[:priority]] }
       end
 
       def client
