@@ -2,10 +2,8 @@ require 'klunk/version'
 require 'klunk/configuration'
 
 module Klunk
-  extend ActiveSupport::Autoload
-
-  autoload :Queue
-  autoload :Topic
+  autoload :Queue, 'klunk/queue'
+  autoload :Topic, 'klunk/topic'
 
   class << self
     attr_accessor :configuration, :configured
