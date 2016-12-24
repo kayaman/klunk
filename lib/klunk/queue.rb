@@ -69,6 +69,12 @@ module Klunk
         }
       end
 
+      def queues_for_shoryuken_config
+        QUEUES.map{|queue| [name_for(queue[:name]), queue[:priority]] }
+      end
+
+      end
+
       def client
         @client ||= Aws::SQS::Client.new
       end
