@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'aws-sdk', '~> 2'
+  spec.add_runtime_dependency 'aws-sigv4', '~> 2'
   spec.add_runtime_dependency 'json', '~> 2.0.2'
 
   spec.add_development_dependency 'bundler', '~> 1.13.6'
