@@ -1,10 +1,9 @@
 require 'klunk/version'
 require 'klunk/configuration'
+require 'klunk/topic'
+require 'klunk/queue'
 
 module Klunk
-  autoload :Queue, 'klunk/queue'
-  autoload :Topic, 'klunk/topic'
-
   class << self
     attr_accessor :configuration, :configured
 
@@ -25,3 +24,4 @@ module Klunk
 end
 
 require 'klunk/railtie' if defined?(Rails)
+require 'klunk/rake_tasks'
