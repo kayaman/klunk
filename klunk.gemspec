@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'klunk'
   spec.version       = Klunk::VERSION
   spec.authors       = ['Marco Antonio Gonzalez Junior', 'Wagner Vaz']
-  spec.email         = ['kayaman.baurets@gmail.com', 'wv@0xd.co']
+  spec.email         = ['m@rco.sh', 'wv@0xd.co']
 
   spec.summary       =  'Enterprise Messaging System on Rails'
   spec.description   =  'Enterprise Messaging System on Rails'
@@ -19,12 +19,11 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'aws-sdk', '~> 2'
-  spec.add_runtime_dependency 'aws-sigv4', '~> 2'
-  spec.add_runtime_dependency 'json', '~> 2.0.2'
+  spec.add_runtime_dependency 'aws-sdk', '~> 3'
+  spec.add_runtime_dependency 'json', '~> 2'
 
-  spec.add_development_dependency 'bundler', '~> 1.13.6'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'bundler', '~> 2'
+  spec.add_development_dependency 'rake', '~> 12'
+  spec.add_development_dependency 'rspec', '~> 3'
 
 end
